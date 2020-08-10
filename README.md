@@ -58,9 +58,17 @@ SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머�
 
 ### 👏🏻 2020/08/04 월
 
+- [SunFlower](https://github.com/android/sunflower) 를 클론 받아서 열어보았는데, 단 하나의 activity, GardenActivity와 나머지 fragment들로 구성되어있었다. 화면의 기본 단위로 fragment를 사용한 것 같았다. 이렇게 activity를 최소한으로 사용한 이유는 리소스 절약에 있어 효율적인 구현을 위한 것이라 생각했다.
+
+- 또한 GardenActivity.kt 아무런 내용이 없었는데, 이는 View와 데이터를 구분하기위한, 즉 MVVM의 모습일 것이라고 생각했다.
+
 <br/>
 
 ### 👏🏻 2020/08/06 목
+
+- [SunFlower](https://github.com/android/sunflower) 의 진짜 첫 화면이 되는, nav_garden.xml를 보았는데, 해당 navigation이라는 res 파일엔, 각각의 fragment들이 연결되어있었다. 그래서 이 navigation이란 무엇인지 공부하였다.
+
+- (Android JetPack의 Navigaiton를 공부하고 정리한 WiKi)[[https://github.com/sery270/sunflower_clone/wiki/[Androidx.Navigation]](https://github.com/sery270/sunflower_clone/wiki/%5BAndroidx.Navigation%5D))
 
 <br/>
 
