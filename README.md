@@ -68,7 +68,7 @@ SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머�
 
 - [SunFlower](https://github.com/android/sunflower) 의 진짜 첫 화면이 되는, nav_garden.xml를 보았는데, 해당 navigation이라는 res 파일엔, 각각의 fragment들이 연결되어있었다. 그래서 이 navigation이란 무엇인지 공부하였다.
 
-- (Android JetPack의 Navigaiton를 공부하고 정리한 WiKi)[[https://github.com/sery270/sunflower_clone/wiki/[Androidx.Navigation]](https://github.com/sery270/sunflower_clone/wiki/%5BAndroidx.Navigation%5D))
+- [Android JetPack의 Navigaiton를 공부하고 정리한 WiKi](https://github.com/sery270/sunflower_clone/wiki/%5BAndroidx.Navigation%5D)
 
 <br/>
 
