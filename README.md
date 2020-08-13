@@ -88,3 +88,25 @@ SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머�
     View 🍽🥣 :: View에 표시할 데이터 처리 및 사용자와의 인터렉션과 라이프 사이클 관련 처리 담당
 
 - [MVVM의 개념을 공부하고 정리한 WiKi](https://github.com/sery270/sunflower_clone/wiki/About-MVVM-Concept)
+
+
+<br/>
+
+### 👏🏻 2020/08/13 목
+
+- 주요 UI를 구성하는 파일들 (xml과 adapter, activity, fragment의 kt 파일들)의 용도와 흐름에 대해서 파악했다.
+
+    ![KakaoTalk_Photo_2020-08-13-17-35-52](https://user-images.githubusercontent.com/59532818/90112816-7321a980-dd8b-11ea-8614-94073b5d9b54.jpeg)
+
+- 이렇게 binding이라는 객체를 통해 inflate 작업을 하는 것 같다. 근데 이 FragmentGardenBinding 이라는 클래스는 generated의 databinding 에 있는 클래스로, 직접 생성하는 것이 아니라, 자동으로 생성되는 부분이었다.
+
+    ![스크린샷 2020-08-13 오후 5 27 28](https://user-images.githubusercontent.com/59532818/90112110-87b17200-dd8a-11ea-9686-2a200418ac4f.png)
+
+- viewpager2에 대해서 알게되었다. 이 viewpager2에 대해 사용할 수 있는 어뎁터로 크게 2가지가 있다. 이는 생명주기(상태)를 고려하느냐 안하느냐의 기능 차이가 있는 것 같다.
+    - 생명주기를 고려할 땐 > [FragmentStateAdapter](https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentStateAdapter)
+    - 생명주기를 고려할 필요가 없을 땐 > [RecyclerView.Adapter](https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter)
+- galleryFragment 의 플로우가 없어서 헤메다가, Unsplash API key를 gradle.properties에 추가하여 해결하였다.
+
+    ![https://user-images.githubusercontent.com/59532818/90110606-74050c00-dd88-11ea-86da-e9165bcde270.png](https://user-images.githubusercontent.com/59532818/90110606-74050c00-dd88-11ea-86da-e9165bcde270.png)
+
+    ![https://user-images.githubusercontent.com/59532818/90110661-88e19f80-dd88-11ea-9a79-8b590b1202ba.png](https://user-images.githubusercontent.com/59532818/90110661-88e19f80-dd88-11ea-9a79-8b590b1202ba.png)
