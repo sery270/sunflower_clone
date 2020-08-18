@@ -4,6 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_garden">
 
+    <fragment
+        android:id="@+id/view_pager_fg"
+        android:name="com.example.sunflower_clone.HomeViewPagerFragment"
+        tools:layout="@layout/fragment_home_view_pager">
+
+        <action
+            android:id="@+id/view_pager_fg_to_plant_detail_fg_action"
+            app:destination="@id/plant_detail_fg"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/plant_detail_fg"
+        android:name="com.example.sunflower_clone.PlantDetailFragment"
+        tools:layout="@layout/fragment_plant_detail">
+        <action
+            android:id="@+id/plant_detail_fg_to_gallery_fg"
+            app:destination="@id/gallery_fg"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="plantId"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gallery_fg"
+        android:name="com.example.sunflower_clone.GalleryFragment"
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="plantName"
+            app:argType="string"/>
+
+    </fragment>
+
 
 
 </navigation>
