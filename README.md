@@ -155,7 +155,7 @@ SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머�
 
 - 클론 코딩을 진행하면서, xml 상에서 특정 속성에 대한 값을 넣어줄 때, 아래의 경우를 발견했었다.
     - @로 시작하는 값 → 개발자가 정의한 부분을 id를 통해 참조
-    - ?로 시작하는 값 → 안드로이드 스튜디오에서 제공해주는 값, generated된 values.xml 참조
+    - ?로 시작하는 값 → 안드로이드 스튜디오에서 제공해주는 값, generated된 파일인 values.xml 참조
     - 하드 코딩 → xml에 직접 박아 넣는 값
     - @{viewModel.plant.description} 변수를 통해 전달하는 값
 
@@ -171,4 +171,4 @@ SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머�
     2. Build.gradle (Module : app) 통일
     3. Build.gradle (Project : sunflower_clone) 통일
 
-    이렇게 통일 시켜 주면, 알아서 project structure에도 반영된다. 그리고 원래 문제 였던 에러도 해결되었다.
+    이렇게 통일 시켜 주면, 알아서 gradle 상의 내용이 project structure에도 반영된다. 또한 gradle의 내용에 따라, 에러의 원인 이었던 values.xml의 내용도 바뀌게 되는 것을 발견하였다. 그렇게 gradle의 간략한 역할과 마주 했던 ?attr/로 시작하는 값에 대한 에러도 해결되었다. 종종 gradle 작성에 대한 requirement도 보이는데, gradle에 대해서 정리해 보려 한다.
