@@ -172,3 +172,23 @@ SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머�
     3. Build.gradle (Project : sunflower_clone) 통일
 
     이렇게 통일 시켜 주면, 알아서 gradle 상의 내용이 project structure에도 반영된다. 또한 gradle의 내용에 따라, 에러의 원인 이었던 values.xml의 내용도 바뀌게 되는 것을 발견하였다. 그렇게 gradle의 간략한 역할과 마주 했던 ?attr/로 시작하는 값에 대한 에러도 해결되었다. 종종 gradle 작성에 대한 requirement도 보이는데, gradle에 대해서 정리해 보려 한다.
+    
+### 👏🏻 2020/09/09 수
+
+- values의 파일들을 통일 하였다.
+- 현재 plant_detail_fragment의 data 태그를 작성하려고 하는 중인데, 아래와 같은 파일들의 연관성을 파악하였다. 이 파일들을 폭 넓게 이해하기 위해서, 다음엔 여기서 사용되는 room에 대해서 공부하려한다.
+    - Plant.kt - PlantDao.kt - PlantRepository.kt
+    - gardenPlanting.kt && PlantAndGardenPlantings.kt - gardenPlantingDao.kt - gardenPlantingRepository.kt
+
+- 또한 해당 파일들을 클론 코딩하면서 깨달은 점을 정리 해보았다.
+    - 데이터 클래스 Plant :: 이 데이터 클래스는 하나의 테이블을 정의하고 있다.
+    - 인터페이스 PlantDao.kt :: 이 인터페이스는 -Repository.kt 를 위한 인터페이스이다. 여기선 Plant.kt에서 정의한 테이블을 대상으로 하는 SQL들을(Query, Insert 등등) 정의하고 있다.
+    - 클래스 PlantRepository.kt :: 이 클래스는 PlantDao.kt를 구현한 것으로, conpanion을 사용한 싱글톤을 사용하고 있다.
+    - ![https://user-images.githubusercontent.com/59532818/92587496-b449a280-f2d2-11ea-8c0b-e6bc6088daaa.png](https://user-images.githubusercontent.com/59532818/92587496-b449a280-f2d2-11ea-8c0b-e6bc6088daaa.png)
+- **추가적으로 정리한 클론 코딩 꿀팁**  **::** 원활한 클론 코딩을 위한 작성 순서
+    - UI
+        1. ?attr/ 을 사용하기 위해 Gradle 통일
+        2. values의 7가지 파일들 anim, colors, dimens, integers, shape, strings, styles 통일
+    - DATA
+        1. fragment의 data 태그를 위한 class, interface 작성
+        2. fragment의 xml 파일에서 data 태그를 통해 변수 사용
