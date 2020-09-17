@@ -194,3 +194,16 @@ SunFlower는 꽃 리스트를 보고 자신의 정원에 심고 싶은 꽃을 �
     - DATA
         1. fragment의 data 태그를 위한 class, interface 작성
         2. fragment의 xml 파일에서 data 태그를 통해 변수 사용
+        
+### 👏🏻 2020/09/17 목
+
+- 내부 저장소, 즉 로컬 데이터베이스에 데이터를 저장하는 방법에 대해서 공부했다. 특히 기존의 SQLite가 아닌, jetPack의 Room에 대해서 공부하였다. 이 Room은 공식 문서에서 적극 권장하는 로컬 데이터베이스 활용 방법이다.
+- Room은 크게 세 가지 구성요소가 있다.
+    - @Database :: 데이터베이스 홀더 및 앱과 데이터간의 기본 액세스 포인트 역할을 한다
+    - @Entity :: 데이터베이스의 각 테이블을 의미한다. (data class)
+    - @DAO :: 각 Entity에 대한 SQL이 메서드로 정의되어있다. (Interface)
+
+        *DAO == Data Access Objects
+
+- 이 개념을 학습하고 Sunflower에서 사용된 Room에 대해 정리해보았다.
+- ![https://user-images.githubusercontent.com/59532818/93456202-4c213f00-f918-11ea-8c5a-cc3925761e85.png](https://user-images.githubusercontent.com/59532818/93456202-4c213f00-f918-11ea-8c5a-cc3925761e85.png)
