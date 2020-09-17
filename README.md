@@ -8,19 +8,21 @@ SunFlower 앱은 Android Jetpack을 잘 사용하고 있어 Jetpack을 공부하
 
 SunFlower는 꽃 리스트를 보고 자신의 정원에 심고 싶은 꽃을 선택에 자신의 정원에 추가하는 기능이 주기능인 앱이다.
 
-SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머지 화면들은 모두 Fragment로 구성되어있다. 이 Fragment간의 교체는 Jetpack의 Navigation을 사용하였다.
+공부하려 하는 이 SunFlower에 사용된 Jetpack components들을 살펴보자면, 아래와 같다.
 
-각 Fragment들은 ConstraintLayout을 사용하여 작성되었고, data binding을 통해 데이터를 View에 뿌려주고 있다. 이와 관련하여, UI를 업데이트 하는데에는 ViewModel과 LiveData가 사용되었다
+- SunFlower는 Kotlin으로 작성되었고, 이 Kotlin의 확장 프로그램 (확장 함수, 확장 속성, 람다, 이름이 지정된 매개변수, 코루틴)인 Android KTX를 사용하여 더 간결하고 코틀린다운 코드를 작성하였다.
+- 이 앱을 싱글 Activity와 여러 Fragment들로 구성되었으며, 이 Fragment들의 전환은 Jetpack의 Navigation과 전환 Animation을 통해 구현되었다.
+- 따라서 사용하는 각 Fragment 화면은 ConstreaintLayout 과 Data Binding으로 생성되었다.
+- 내부 저장소로 구현된 the plant list와 my garden entries의 운영은 아래와 같다.
+    - 데이터베이스단의 처리> Room
+    - UI단의 처리> LiveData를 통한 ViewModels
 
-꽃 리스트들을 저장하는 곳은 Room을 사용하였다.
+> 아래는 추후 업데이트 ...
 
-앱 테스트는 JUnit과 익스프레소가 사용되었다.
-
-<br/>
-
-> 추후 업데이트 ...
-
-<br/>
+- [~~AppCompat](https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat) is used to preserve key app functionality on older versions of Android~~
+- ~~Background tasks are handled by [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager)~~
+- ~~Plant details can be [shared](https://developer.android.com/training/sharing/shareaction) with other applications on the device, or simply copied to the clipboard~~
+- [~~Testing](https://developer.android.com/training/testing/) is performed by both [local JUnit tests](https://developer.android.com/training/testing/unit-testing/) and [Espresso](https://developer.android.com/training/testing/espresso/) Android UI tests~~
 
 ## SunFlower_CloneCoding 프로젝트의 conventions
 
