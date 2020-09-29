@@ -207,3 +207,11 @@ SunFlower는 꽃 리스트를 보고 자신의 정원에 심고 싶은 꽃을 �
 
 - 이 개념을 학습하고 Sunflower에서 사용된 Room에 대해 정리해보았다.
 - ![https://user-images.githubusercontent.com/59532818/93456202-4c213f00-f918-11ea-8c5a-cc3925761e85.png](https://user-images.githubusercontent.com/59532818/93456202-4c213f00-f918-11ea-8c5a-cc3925761e85.png)
+
+
+### 👏🏻 2020/09/29 화
+
+- 오늘은 codelabs의 [Android Room with a View - Kotlin](https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/index.html?index=..%2F..index#9)를 보면서, [Android Room](https://developer.android.com/reference/androidx/room/package-summary)에 대한 [실습](https://github.com/sery270/RoomExamples_Codelabs)을 진행하였다.
+- 아래 그림의 큰 그림을 가지고 [실습](https://github.com/sery270/RoomExamples_Codelabs)을 진행하였다. 현재는 repository까지 생성하였다. 지난 스터디 시간에 공부 했던, Room에 대한 이해가 해당 자료의 설명과 잘 fit되는 느낌이어서, 공부한 보람이 있었다.
+- ![bigpics](https://user-images.githubusercontent.com/59532818/94538231-b7ef9a00-027e-11eb-96bf-07742c851e3c.png)
+- MVVM 패턴과 관련하여, livedata에 대해서 접하게 되었는데, 아직 observer라는 개념이 생소한 상태이다. 대충 subscriber와 observer로 이루어져 UI단에서 data 처리 효율을 챙긴다. 정도로 이해하고 있다. 이 실습을 통해서, @Dao에서 선언한, livedata들이 관찰되고, 이 관찰된 livedata들이 자신의 변경 사항이 있을 때, 메인 스레드의 관찰자에게 알려서, UI단의 수정이 이루어지게 한다.
