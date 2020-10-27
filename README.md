@@ -8,19 +8,21 @@ SunFlower 앱은 Android Jetpack을 잘 사용하고 있어 Jetpack을 공부하
 
 SunFlower는 꽃 리스트를 보고 자신의 정원에 심고 싶은 꽃을 선택에 자신의 정원에 추가하는 기능이 주기능인 앱이다.
 
-SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머지 화면들은 모두 Fragment로 구성되어있다. 이 Fragment간의 교체는 Jetpack의 Navigation을 사용하였다.
+공부하려 하는 이 SunFlower에 사용된 Jetpack components들을 살펴보자면, 아래와 같다.
 
-각 Fragment들은 ConstraintLayout을 사용하여 작성되었고, data binding을 통해 데이터를 View에 뿌려주고 있다. 이와 관련하여, UI를 업데이트 하는데에는 ViewModel과 LiveData가 사용되었다
+- SunFlower는 Kotlin으로 작성되었고, 이 Kotlin의 확장 프로그램 (확장 함수, 확장 속성, 람다, 이름이 지정된 매개변수, 코루틴)인 Android KTX를 사용하여 더 간결하고 코틀린다운 코드를 작성하였다.
+- 이 앱을 싱글 Activity와 여러 Fragment들로 구성되었으며, 이 Fragment들의 전환은 Jetpack의 Navigation과 전환 Animation을 통해 구현되었다.
+- 따라서 사용하는 각 Fragment 화면은 ConstreaintLayout 과 Data Binding으로 생성되었다.
+- 내부 저장소로 구현된 the plant list와 my garden entries의 운영은 아래와 같다.
+    - 데이터베이스단의 처리> Room
+    - UI단의 처리> LiveData를 통한 ViewModels
 
-꽃 리스트들을 저장하는 곳은 Room을 사용하였다.
+> 아래는 추후 업데이트 ...
 
-앱 테스트는 JUnit과 익스프레소가 사용되었다.
-
-<br/>
-
-> 추후 업데이트 ...
-
-<br/>
+- [~~AppCompat](https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat) is used to preserve key app functionality on older versions of Android~~
+- ~~Background tasks are handled by [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager)~~
+- ~~Plant details can be [shared](https://developer.android.com/training/sharing/shareaction) with other applications on the device, or simply copied to the clipboard~~
+- [~~Testing](https://developer.android.com/training/testing/) is performed by both [local JUnit tests](https://developer.android.com/training/testing/unit-testing/) and [Espresso](https://developer.android.com/training/testing/espresso/) Android UI tests~~
 
 ## SunFlower_CloneCoding 프로젝트의 conventions
 
@@ -172,3 +174,44 @@ SunFlower의 구조로는 단 하나의 Activity만 사용하였으며, 나머�
     3. Build.gradle (Project : sunflower_clone) 통일
 
     이렇게 통일 시켜 주면, 알아서 gradle 상의 내용이 project structure에도 반영된다. 또한 gradle의 내용에 따라, 에러의 원인 이었던 values.xml의 내용도 바뀌게 되는 것을 발견하였다. 그렇게 gradle의 간략한 역할과 마주 했던 ?attr/로 시작하는 값에 대한 에러도 해결되었다. 종종 gradle 작성에 대한 requirement도 보이는데, gradle에 대해서 정리해 보려 한다.
+    
+### 👏🏻 2020/09/09 수
+
+- values의 파일들을 통일 하였다.
+- 현재 plant_detail_fragment의 data 태그를 작성하려고 하는 중인데, 아래와 같은 파일들의 연관성을 파악하였다. 이 파일들을 폭 넓게 이해하기 위해서, 다음엔 여기서 사용되는 room에 대해서 공부하려한다.
+    - Plant.kt - PlantDao.kt - PlantRepository.kt
+    - gardenPlanting.kt && PlantAndGardenPlantings.kt - gardenPlantingDao.kt - gardenPlantingRepository.kt
+
+- 또한 해당 파일들을 클론 코딩하면서 깨달은 점을 정리 해보았다.
+    - 데이터 클래스 Plant :: 이 데이터 클래스는 하나의 테이블을 정의하고 있다.
+    - 인터페이스 PlantDao.kt :: 이 인터페이스는 -Repository.kt 를 위한 인터페이스이다. 여기선 Plant.kt에서 정의한 테이블을 대상으로 하는 SQL들을(Query, Insert 등등) 정의하고 있다.
+    - 클래스 PlantRepository.kt :: 이 클래스는 PlantDao.kt를 구현한 것으로, conpanion을 사용한 싱글톤을 사용하고 있다.
+    - ![https://user-images.githubusercontent.com/59532818/92587496-b449a280-f2d2-11ea-8c0b-e6bc6088daaa.png](https://user-images.githubusercontent.com/59532818/92587496-b449a280-f2d2-11ea-8c0b-e6bc6088daaa.png)
+- **추가적으로 정리한 클론 코딩 꿀팁**  **::** 원활한 클론 코딩을 위한 작성 순서
+    - UI
+        1. ?attr/ 을 사용하기 위해 Gradle 통일
+        2. values의 7가지 파일들 anim, colors, dimens, integers, shape, strings, styles 통일
+    - DATA
+        1. fragment의 data 태그를 위한 class, interface 작성
+        2. fragment의 xml 파일에서 data 태그를 통해 변수 사용
+        
+### 👏🏻 2020/09/17 목
+
+- 내부 저장소, 즉 로컬 데이터베이스에 데이터를 저장하는 방법에 대해서 공부했다. 특히 기존의 SQLite가 아닌, jetPack의 Room에 대해서 공부하였다. 이 Room은 공식 문서에서 적극 권장하는 로컬 데이터베이스 활용 방법이다.
+- Room은 크게 세 가지 구성요소가 있다.
+    - @Database :: 데이터베이스 홀더 및 앱과 데이터간의 기본 액세스 포인트 역할을 한다
+    - @Entity :: 데이터베이스의 각 테이블을 의미한다. (data class)
+    - @DAO :: 각 Entity에 대한 SQL이 메서드로 정의되어있다. (Interface)
+
+        *DAO == Data Access Objects
+
+- 이 개념을 학습하고 Sunflower에서 사용된 Room에 대해 정리해보았다.
+- ![https://user-images.githubusercontent.com/59532818/93456202-4c213f00-f918-11ea-8c5a-cc3925761e85.png](https://user-images.githubusercontent.com/59532818/93456202-4c213f00-f918-11ea-8c5a-cc3925761e85.png)
+
+
+### 👏🏻 2020/09/29 화
+
+- 오늘은 codelabs의 [Android Room with a View - Kotlin](https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/index.html?index=..%2F..index#9)를 보면서, [Android Room](https://developer.android.com/reference/androidx/room/package-summary)에 대한 [실습](https://github.com/sery270/RoomExamples_Codelabs)을 진행하였다.
+- 아래 그림의 큰 그림을 가지고 [실습](https://github.com/sery270/RoomExamples_Codelabs)을 진행하였다. 현재는 repository까지 생성하였다. 지난 스터디 시간에 공부 했던, Room에 대한 이해가 해당 자료의 설명과 잘 fit되는 느낌이어서, 공부한 보람이 있었다.
+- ![bigpics](https://user-images.githubusercontent.com/59532818/94538231-b7ef9a00-027e-11eb-96bf-07742c851e3c.png)
+- MVVM 패턴과 관련하여, livedata에 대해서 접하게 되었는데, 아직 observer라는 개념이 생소한 상태이다. 대충 subscriber와 observer로 이루어져 UI단에서 data 처리 효율을 챙긴다. 정도로 이해하고 있다. 이 실습을 통해서, @Dao에서 선언한, livedata들이 관찰되고, 이 관찰된 livedata들이 자신의 변경 사항이 있을 때, 메인 스레드의 관찰자에게 알려서, UI단의 수정이 이루어지게 한다.
